@@ -29,7 +29,7 @@ step_sizes = [
     if box_sorted[i + 1] - box_sorted[i] != 0
 ]
 
-print("Sorted drop masses:", box_sorted)
+print("Sorted box masses:", box_sorted)
 print("Non-zero step sizes (should be multiples of mass_step):", step_sizes)
 
 # Plot both absolute and relative increases
@@ -38,7 +38,7 @@ plt.figure(figsize=(10, 5))
 plt.subplot(1, 2, 1)
 plt.bar(range(len(absolute_increase)), absolute_increase)
 plt.xlabel("Drop # (sorted by mass)")
-plt.ylabel("Absolute Increase to Smallest Drop")
+plt.ylabel("Absolute Increase to Lightest Box")
 plt.title("Absolute Mass Increase (Oil Drop Analogy)")
 
 plt.subplot(1, 2, 2)
