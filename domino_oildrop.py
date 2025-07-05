@@ -7,10 +7,12 @@ mass_mean = 6.5
 mass_step = 1.2
 
 # Generate random "drop" masses, simulating oil drops picking up integer numbers of electrons
-num_drops = 40
+# The analogy is sealed boxes containing identical domino pieces, each with a mass
+# Quantization is represented by the fact that each box can only have masses that are integer multiples of the step size above a minimum mass.
+num_box = 40
 box_masses = []
-for _ in range(num_drops):
-    # Each drop gets a mass that's an integer multiple of the step size above the minimum
+for _ in range(num_box):
+    # Each box gets a mass that's an integer multiple of the step size above the minimum
     n_steps = random.randint(1, int(4 * mass_mean))
     mass = mass_step + n_steps * mass_step
     box_masses.append(mass)
@@ -18,11 +20,11 @@ for _ in range(num_drops):
 # Sort the masses to analyze quantization
 box_sorted = sorted(box_masses)
 
-# Calculate absolute increase relative to the smallest drop
+# Calculate absolute increase relative to the smallest box
 smallest = box_sorted[0]
 absolute_increase = [mass - smallest for mass in box_sorted]
 
-# Calculate non-zero step sizes between consecutive drops (should cluster around mass_step)
+# Calculate non-zero step sizes between consecutive box (should cluster around mass_step)
 step_sizes = [
     box_sorted[i + 1] - box_sorted[i]
     for i in range(len(box_sorted) - 1)
@@ -37,7 +39,7 @@ plt.figure(figsize=(10, 5))
 
 plt.subplot(1, 2, 1)
 plt.bar(range(len(absolute_increase)), absolute_increase)
-plt.xlabel("Drop # (sorted by mass)")
+plt.xlabel("Box # (sorted by mass)")
 plt.ylabel("Absolute Increase to Lightest Box")
 plt.title("Absolute Mass Increase (Oil Drop Analogy)")
 
